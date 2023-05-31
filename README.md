@@ -1,2 +1,2 @@
 # Image-Style-Transfer-Using-CNNs
-Image Style Transfer Using Convolutional Neural Networks
+A Pytorch implementation of [Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf)
