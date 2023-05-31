@@ -1,0 +1,13 @@
+data:
+  content_folder: C:\Users\Gianluca\Desktop\style_transfer\content
+  style_folder: C:\Users\Gianluca\Desktop\style_transfer\style
+  output_folder: C:\Users\Gianluca\Desktop\style_transfer\output
+  img_size: 1080
+
+weights:
+  alpha: 1
+  beta: 1e6
+
+train:
+  lr: 1e-3
+  steps: 1000
