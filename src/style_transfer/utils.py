@@ -23,4 +23,6 @@ def gram_matrix(tensor: Tensor):
     """
     c, h, w = tensor.size()
     tensor = tensor.view(c, h * w)
-    return torch.mm(tensor, tensor.t())
+    gm = torch.mm(tensor, tensor.t())
+    # Return 'normalized' values
+    return gm.div(c * h * w)

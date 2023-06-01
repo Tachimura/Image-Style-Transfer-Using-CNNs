@@ -5,21 +5,13 @@ data:
   img_size: [3, 1080, 1080]
 
 weights:
-  alpha: 1.0
+  alpha: 1
   beta: 1e6
-  content_layers:
-    conv4_2: 1.0
-  style_layers:
-    conv1_1: 1.0
-    conv2_1: 0.8
-    conv3_1: 0.5
-    conv4_1: 0.3
-    conv5_1: 0.1
 
 train:
   lr: 1e-3
-  steps: 1000
-  print_every: 100
+  steps: 300
+  print_every: 20
 
 model: vgg19
 device: cuda
