@@ -24,13 +24,21 @@ def main(args):
 
     # Prepare the params for the style-transfer process
     style_transfer_params = {
-        "model": "vgg19",
-        "device": torch.device("cuda" if torch.cuda.is_available() else "cpu"),
-        "content_weight": float(config["weights"]["alpha"]),  # alpha 1 per pytorch 1e3 per keras
-        "style_weight": float(config["weights"]["beta"]),  # beta 1e6 per pytorch 1e-2 per keras
+        "model": config["model"],
+        "device": torch.device("cuda" if torch.cuda.is_available() and "cuda" in config["device"] else "cpu"),
+        "content_weight": float(config["weights"]["alpha"]),
+        "style_weight": float(config["weights"]["beta"]),
         "lr": float(config["train"]["lr"]),
         "steps": int(config["train"]["steps"]),
-        "img_size": int(config["data"]["img_size"])
+        "print_every": int(config["train"]["print_every"]),
+        "img_size":
+            config["data"]["img_size"] if isinstance(config["data"]["img_size"], list)
+            else (3, int(config["data"]["img_size"]), int(config["data"]["img_size"])),
+        "layers": {
+            "content": config["layers"]["content"],
+            "style": config["layers"]["style"]
+        },
+        "weights": config["weights"]
     }
 
     # For each content image, transfer the style of a random style image
@@ -38,8 +46,8 @@ def main(args):
         print(f"Status: {idx} / {len(content_dataset)}")
 
         # Read content and a random style image
-        content_image = load_image(content_image_path, max_dim=style_transfer_params["img_size"])
-        style_image = load_image(select_random_image(style_dataset), max_dim=style_transfer_params["img_size"])
+        content_image = load_image(content_image_path, max_dim=max(style_transfer_params["img_size"]))
+        style_image = load_image(select_random_image(style_dataset), max_dim=max(style_transfer_params["img_size"]))
 
         # Generate the output image
         output_image = transfer_style(content_image, style_image, style_transfer_params)

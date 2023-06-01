@@ -2,12 +2,34 @@ data:
   content_folder: C:\Users\Gianluca\Desktop\style_transfer\content
   style_folder: C:\Users\Gianluca\Desktop\style_transfer\style
   output_folder: C:\Users\Gianluca\Desktop\style_transfer\output
-  img_size: 1080
+  img_size: [3, 1080, 1080]
 
 weights:
-  alpha: 1
+  alpha: 1.0
   beta: 1e6
+  content_layers:
+    conv4_2: 1.0
+  style_layers:
+    conv1_1: 1.0
+    conv2_1: 0.8
+    conv3_1: 0.5
+    conv4_1: 0.3
+    conv5_1: 0.1
 
 train:
   lr: 1e-3
   steps: 1000
+  print_every: 100
+
+model: vgg19
+device: cuda
+
+layers:
+  content:
+    '21': conv4_2
+  style:
+    '0': conv1_1
+    '5': conv2_1
+    '10': conv3_1
+    '19': conv4_1
+    '28': conv5_1
